@@ -1,0 +1,33 @@
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Inventory?serverTimezone=UTC
+    username: root
+    password: 513315
+
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/ # 设置模板文件的前缀路径
+    suffix: .html # 设置模板文件的后缀
+    cache: false
+
+  redis:
+    host: 127.0.0.1  #redis默认主机ip
+    port: 6379
+
+mybatis:
+  mapper-location: classpath:dao/*Dao.xml #指定mapper映射文件路径
+
+mybatis-plus:
+  globat-config:
+    db-config:
+      table-prefix: tbl_
+      id-type: auto
+
+
+

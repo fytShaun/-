@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script  type="text/javascript">
+
+        function login(){
+
+            var name = document.getElementById('username').value;
+            var pass = document.getElementById('password').value;
+            var user = {username: name, password: pass};
+
+            axios.post( '/users/doLogin',user)
+                .then(function (response) {
+                    if(response.data.code==501){
+                    window.location.href="/users/doLoginOk/"+response.data.data;}
+                    else{
+                        alert(JSON.stringify(response.data.msg));
+                    }
+                })
+                .catch(function(error){
+                    alert(JSON.stringify(error));
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+<form method="post" th:action="@{/users/doLogin}">
+    用户名称：<input type="text" name="username" id="username"><br>
+    密码：<input type="password" name="password" id="password"><br>
+    <input type="button" value="提交" onclick="login()">
+<!--    <input type="submit" value="submit">-->
+</form>
+
+</body>
+</html>
